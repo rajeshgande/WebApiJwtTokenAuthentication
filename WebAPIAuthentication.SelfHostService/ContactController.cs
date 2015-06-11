@@ -4,6 +4,7 @@ using System.Web.Http;
 
 namespace WebAPIAuthentication.SelfHostService
 {
+    [Authorize]
     public class ContactController : ApiController
     {
         // Mock a data store:
@@ -13,7 +14,6 @@ namespace WebAPIAuthentication.SelfHostService
             new Contact { Name = "Dave", Phone= "111-111-1111" },
             new Contact { Name = "Henry", Phone= "222-222-2222" }
         };
-
 
         public IEnumerable<Contact> Get()
         {
