@@ -31,6 +31,39 @@ namespace WebAPIAuthentication.SelfHostService
         }
     }
 
+    public class UserStore : IUserStore<ApplicationUser>
+    {
+        public void Dispose()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task CreateAsync(ApplicationUser user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task UpdateAsync(ApplicationUser user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task DeleteAsync(ApplicationUser user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ApplicationUser> FindByIdAsync(string userId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<ApplicationUser> FindByNameAsync(string userName)
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
         IList<ApplicationUser>  _users = new List<ApplicationUser>()
@@ -39,9 +72,19 @@ namespace WebAPIAuthentication.SelfHostService
             new ApplicationUser(){Id="2", UserName="UserTwo", Password = "UserTwo"}
         };
 
+        public static ApplicationUserManager Create()
+        {
+            return new ApplicationUserManager(new UserStore());
+        }
+
+       
+        public ApplicationUserManager(IUserStore<ApplicationUser> store) : base(store)
+        {
+        }
+
         public ApplicationUser Find(string _userId, string _password)
         {
-            return _users.FirstOrDefault(x => x.Id == _userId && x.Password == _password);
+            return _users.FirstOrDefault(x => x.UserName == _userId && x.Password == _password);
         }
     }
 }
