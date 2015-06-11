@@ -11,6 +11,7 @@ namespace WebAPIAuthentication.SelfHostService
         {
             var identity = User.Identity as ClaimsIdentity;
             
+            
             var claims = from c in identity.Claims
                 select new
                 {

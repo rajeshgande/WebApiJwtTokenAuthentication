@@ -38,6 +38,8 @@ namespace WebAPIAuthentication.SelfHostService.Providers
             
             ClaimsIdentity oAuthIdentity = await applicationUser.GenerateUserIdentityAsync(userManager, "JWT");
 
+            oAuthIdentity.AddClaim(new Claim("InstallId", "CPC01"));
+
             var ticket = new AuthenticationTicket(oAuthIdentity, null);
 
             context.Validated(ticket);
